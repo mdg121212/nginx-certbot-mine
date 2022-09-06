@@ -40,6 +40,8 @@ services:
 
   keycloak:
     image: quay.io/keycloak/keycloak:19.0.1
+    volumes:
+      - ./realm-export.json:/tmp/realm-export.json
     depends_on:
       - mariadb
     container_name: keycloak-container
@@ -65,5 +67,5 @@ services:
       KC_HTTP_ENABLED: "true"
       KC_HOSTNAME_STRICT: "false"
       KC_HOSTNAME_STRICT_HTTPS: "false"
-      KEYCLOAK_IMPORT: ${KEYCLOAK_IMPORT}
+      KEYCLOAK_IMPORT: /tmp/realm-export.json
     restart: unless-stopped
