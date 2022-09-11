@@ -38,6 +38,17 @@ services:
 
     restart: always
 
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin-container
+    environment:
+      PMA_HOST: mariadb
+      PMA_PORT: 3306
+      PMA_ABSOLUTE_URI: https://www.yourserver.com/yourroute
+    restart: always
+    ports:
+      - 8083:80
+
   keycloak:
     image: quay.io/keycloak/keycloak:19.0.1
     volumes:
